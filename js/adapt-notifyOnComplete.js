@@ -26,11 +26,12 @@ define([
         }
 
         var notifyConfig = pageModel.get("_notifyOnComplete");
+       
         Adapt.trigger("notify:push", {
             title: notifyConfig.title,
             body: notifyConfig.body,
-            _timeout: 5000,
-            _callbackEvent: "navigation:backButton"
+            //_timeout: 5000,
+            _callbackEvent: "pushNotify:clicked"
         });
     }
 
@@ -40,9 +41,11 @@ define([
         if (assessment && assessment._requireAssessmentPassed && !courseModel.get("_isAssessmentPassed")) return;
 
       var notifyConfig = courseModel.get("_notifyOnComplete");
-        Adapt.trigger("notify:popup", {
+        Adapt.trigger("notify:push", {
             title: notifyConfig.title,
-            body: notifyConfig.body
+            body: notifyConfig.body,
+            _timeout: 5000,
+            _callbackEvent: "navigation:backButton"
         });
     }
 
